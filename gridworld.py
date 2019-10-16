@@ -87,7 +87,28 @@ class GridWorld:
                     elif(self.state_matrix[row, col] == +1): row_string += ' * '
             row_string += '\n'
             graph += row_string 
-        print (graph)            
+        print (graph)
+        
+    def print_policy(self, policy_matrix):
+        '''Print the policy using specific symbol.
+        * terminal state
+        ^ > v < up, right, down, left
+        # obstacle
+        '''
+        counter = 0
+        shape = policy_matrix.shape
+        policy_string = ""
+        for row in range(shape[0]):
+            for col in range(shape[1]):
+                if(policy_matrix[row,col] == -1): policy_string += " *  "            
+                elif(policy_matrix[row,col] == 0): policy_string += " ^  "
+                elif(policy_matrix[row,col] == 1): policy_string += " >  "
+                elif(policy_matrix[row,col] == 2): policy_string += " v  "           
+                elif(policy_matrix[row,col] == 3): policy_string += " <  "
+                elif(np.isnan(policy_matrix[row,col])): policy_string += " #  "
+                counter += 1
+            policy_string += '\n'
+        print(policy_string)
 
     def reset(self, exploring_starts=False):
         ''' Set the position of the robot in the bottom left corner.
@@ -115,7 +136,7 @@ class GridWorld:
         @return reward the reward associated with the next state
         @return done True if the state is terminal  
         '''
-        if(action >= self.action_space_size): 
+        if(action >= self.action_space_size): `
             raise ValueError('The action is not included in the action space.')
 
         #Based on the current action and the probability derived
@@ -149,6 +170,6 @@ class GridWorld:
                 reward = 0
         #reward = self.reward_matrix[self.position[0], self.position[1]]
         #Done is True if the state is a terminal state
-        done = bool(self.state_matrix[self.position[0], self.position[1]])
-        return self.position, reward, done
+        #done = bool(self.state_matrix[self.position[0], self.position[1]])
+        return self.position, reward
 
