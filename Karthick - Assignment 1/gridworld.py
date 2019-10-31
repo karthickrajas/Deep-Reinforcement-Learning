@@ -66,10 +66,10 @@ class gridworld:
             new_position[1]=3       
             self.position = new_position
             
-        elif (new_position[0]<0 or new_position[0]>=self.world_row-1):
+        elif (new_position[0]<0 or new_position[0]>=self.world_row):
             reward = -1
             
-        elif(new_position[1]<0 or new_position[1]>=self.world_col-1):
+        elif(new_position[1]<0 or new_position[1]>=self.world_col):
             reward = -1
             
         else:
